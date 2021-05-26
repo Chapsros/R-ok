@@ -190,7 +190,7 @@ class SelBox:
 
 
 
-# fonction pour l'ecran info
+#ECRAN D'INSTRUCTIONS
 
 def show_info(ecran, scr_largeur, clock):
     while True:
@@ -198,36 +198,35 @@ def show_info(ecran, scr_largeur, clock):
             if event.type == pygame.QUIT:
                 sys.exit()
         ecran.fill((60, 90, 100))
-        main_text = pygame.font.Font('freesansbold.ttf', 35)
-        other_text = pygame.font.Font('freesansbold.ttf', 25)
+        main_text = pygame.font.Font(os.path.join(assets,'Jelly Crazies.ttf'), 40)
+        other_text = pygame.font.Font(os.path.join(assets,'CutieShark.ttf'), 30)
 
-        game_play = main_text.render('INSTRUCTION', True, colors[2][1])
-        ecran.blit(game_play, (500, 50))
+        game_play = main_text.render('INSTRUCTIONS', True, const.ROUGE)
+        ecran.blit(game_play, (350, 20))
 
-        line = other_text.render("CONTROLS:-", True, const.BLANC)
-        ecran.blit(line, (130, 130))
-        line = other_text.render("PLAYER 1 :- Z,Q,S,D     PLAYER 2 :- touches claviers", True, const.BLANC)
-        ecran.blit(line, (290, 170))
+        line = other_text.render("CONTRÔLES: ", True, const.ORANGE)
+        ecran.blit(line, (130, 120))
+        line = other_text.render("PLAYER 1 : Z,Q,S,D     PLAYER 2 : Touches directionnelles", True, const.ORANGE)
+        ecran.blit(line, (150, 150))
 
-        line = other_text.render("1. Clicker sur le player 1 ou le player 2 et entrez votre nom.", True, const.BLANC)
-        ecran.blit(line, (100, 220))
+        line = other_text.render("1. Entrez le nom et choisissez la couleur de chaque joueur.", True, const.BLANC)
+        ecran.blit(line, (100, 200))
 
-        line = other_text.render("2. Choisissez la couleur de votre raquette sur l'ecran d'acceuil.", True, const.BLANC)
-        ecran.blit(line, (100,  260))
+        line = other_text.render("2. Choisissez la couleur du terrain.", True, const.BLANC)
+        ecran.blit(line, (100, 250))
 
-        line = other_text.render("3. Avant de commencer à jouer selectionner la difficulté et le terrain.", True, const.BLANC)
-        ecran.blit(line, (100, 300))
+        line = other_text.render("3. Déplacez votre palais afin de marquer ou de bloquer les tirs adverses.", True, const.BLANC)
+        ecran.blit(line, (100, 300))   
 
-        line = other_text.render("4. Le jeu ce compose en 3 rounds, le player qui gagne", True, const.BLANC)
+        line = other_text.render("4. Le premier joueur à 7 points, gagne la mange.", True, const.BLANC)
         ecran.blit(line, (100, 350))
-        line = other_text.render(" les 3 rounds est le vainceur.", True, const.BLANC)
-        ecran.blit(line, (130, 390))
+        line = other_text.render("Le joueur ayant remporté 3 manches est vainqueur.", True, const.BLANC)
+        ecran.blit(line, (130, 385))
 
-        line = other_text.render("5. Durent la partie, vous pouvez mettre pause grâce à la SpaceBar ", True,
-                                 const.BLANC)
-        ecran.blit(line, (100, 440))
-        line = other_text.render("ou clicker sur l'icon pause sur votre ecran.", True, const.BLANC)
-        ecran.blit(line, (130, 480))
+        line = other_text.render("5. Le vainqueur d'une manche se voit attribuer des points", True, const.BLANC)
+        ecran.blit(line, (100, 435))
+        line = other_text.render("correspondant à la différence des points des 2 joueurs.", True, const.BLANC)
+        ecran.blit(line, (130, 465))
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()

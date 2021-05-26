@@ -25,6 +25,9 @@ DIFFICILE = 850
 # couleur
 NOIR = (0, 0, 0)
 BLANC = (255, 255, 255)
+ORANGE = (250, 150, 27)
+JAUNE = (240, 236, 29)
+ROUGE = (245, 29, 5)
 
 # Score
 SCORE_LIMITE = 7
