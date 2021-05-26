@@ -201,12 +201,12 @@ def show_info(ecran, scr_largeur, clock):
         main_text = pygame.font.Font(os.path.join(assets,'Jelly Crazies.ttf'), 40)
         other_text = pygame.font.Font(os.path.join(assets,'CutieShark.ttf'), 30)
 
-        game_play = main_text.render('INSTRUCTIONS', True, const.ROUGE)
+        game_play = main_text.render('INSTRUCTIONS', True, const.VIOLET)
         ecran.blit(game_play, (350, 20))
 
-        line = other_text.render("CONTRÔLES: ", True, const.ORANGE)
+        line = other_text.render("CONTRÔLES: ", True, const.VIOLINE)
         ecran.blit(line, (130, 120))
-        line = other_text.render("PLAYER 1 : Z,Q,S,D     PLAYER 2 : Touches directionnelles", True, const.ORANGE)
+        line = other_text.render("PLAYER 1 : Z,Q,S,D     PLAYER 2 : Touches directionnelles", True, const.VIOLINE)
         ecran.blit(line, (150, 150))
 
         line = other_text.render("1. Entrez le nom et choisissez la couleur de chaque joueur.", True, const.BLANC)
@@ -233,14 +233,14 @@ def show_info(ecran, scr_largeur, clock):
 
         # boutton de retour
         if abs(mouse[0] - scr_largeur / 2 - 50) < 120 and abs(mouse[1] - 550) < 40:
-            pygame.draw.rect(ecran, colors[2][1], (scr_largeur / 2 - 50, 520, 130, 30))
+            pygame.draw.rect(ecran, const.VIOLINE, (scr_largeur / 2 - 50, 520, 130, 30))
             if click[0] == 1:
                 return
         else:
-            pygame.draw.rect(ecran, colors[2][0], (scr_largeur / 2 - 50, 520, 130, 30))
+            pygame.draw.rect(ecran, const.VIOLET, (scr_largeur / 2 - 50, 520, 130, 30))
 
         back = other_text.render("RETOUR", True, const.NOIR)
-        ecran.blit(back, (scr_largeur / 2 - 40, 525))
+        ecran.blit(back, (scr_largeur / 2 - 29, 515))
         pygame.display.flip()
         clock.tick(10)
 
