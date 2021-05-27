@@ -146,8 +146,6 @@ def text_obj(text, font, color):
 
 
 # fonction qui rend les bouttons interactif
-
-
 def button_circle(ecran, butt_color, button_pos, text, text_size, text_color,
                   text_pos, radius):
     pygame.draw.circle(ecran, butt_color, button_pos, radius)
@@ -157,8 +155,6 @@ def button_circle(ecran, butt_color, button_pos, text, text_size, text_color,
 
 
 # fonction pour ecrire du texte sur l'ecran
-
-
 def disp_text(ecran, text, center, font_and_size, color):
     text_surf, text_rect = text_obj(text, font_and_size, color)
     text_rect.center = center
@@ -166,8 +162,6 @@ def disp_text(ecran, text, center, font_and_size, color):
 
 
 # class pour selectionner les couleurs des terrains
-
-
 class SelBox:
     def __init__(self, pid, grid_position):
         self.playerId = pid
@@ -191,7 +185,6 @@ class SelBox:
 
 
 #ECRAN D'INSTRUCTIONS
-
 def show_info(ecran, scr_largeur, clock):
     while True:
         for event in pygame.event.get():
@@ -245,7 +238,6 @@ def show_info(ecran, scr_largeur, clock):
         clock.tick(10)
 
 #ECRAN SHOP
-
 def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
     while True:
         for event in pygame.event.get():
@@ -277,7 +269,7 @@ def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
         player_2_cage = import_save_alljoueur(player_2_name)[4]
         
 
-        line = other_text.render("Points joueur 1 : " + str(player_1_point), True, const.BLEU)
+        line = other_text.render("Points Joueur 1 : " + str(player_1_point), True, const.BLEU)
         ecran.blit(line, (20, 20))
         line = other_text.render("Points Joueur 2 : " + str(player_2_point), True, const.BLEU)
         ecran.blit(line, (scr_largeur - 200, 20))
@@ -543,15 +535,16 @@ def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
         pygame.display.flip()
         clock.tick(10)
 
-# fonction ecran classement
+#TABLEAU DES SCORES
 def show_classement(ecran, scr_largeur, clock):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
         ecran.fill((60, 90, 100))
-        main_text = pygame.font.Font('freesansbold.ttf', 35)
-        other_text = pygame.font.Font('freesansbold.ttf', 25)
+        main_text = pygame.font.Font(os.path.join(assets,'Jelly Crazies.ttf'), 35)
+        other_text = pygame.font.Font(os.path.join(assets,'CutieShark.ttf'), 25)        
+        oth_text = pygame.font.Font(os.path.join(assets,'CutieShark.ttf'), 30)
 
         fichiers = [f for f in listdir("joueur") if isfile(join("joueur", f))]
         all = []
@@ -562,68 +555,68 @@ def show_classement(ecran, scr_largeur, clock):
 
         all = sorted(all, key=lambda M : M[1], reverse=True)        
 
-        game_play = main_text.render('CLASSEMENT', True, colors[2][0])
-        ecran.blit(game_play, (scr_largeur / 2 - 130, 70))
+        game_play = main_text.render('CLASSEMENT', True, const.VIOLET)
+        ecran.blit(game_play, (scr_largeur / 2 - 280, 50))        
+        line = oth_text.render("Les 10 meilleurs joueurs :", True, const.VIOLINE)
+        ecran.blit(line, (420, 120))
 
         if (len(fichiers) >= 1):
-            line = other_text.render("1er avec " + str(all[0][1]) + " points : " + all[0][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 8, 160))
+            line = other_text.render("1er : " + all[0][0] + " avec " + str(all[0][1]) + " points" , True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 7, 180))
 
         if (len(fichiers) >= 2):
-            line = other_text.render("2eme avec " + str(all[1][1]) + " points : " + all[1][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 8, 230))
+            line = other_text.render("2ème : " + all[1][0] + " avec " + str(all[1][1]) + " points" , True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 7, 230))
 
         if (len(fichiers) >= 3):
-            line = other_text.render("3eme avec " + str(all[2][1]) + " points : " + all[2][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 8, 300))
+            line = other_text.render("3ème : " + all[2][0] + " avec " + str(all[2][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 7, 280))
 
         if (len(fichiers) >= 4):
-            line = other_text.render("4eme avec " + str(all[3][1]) + " points : " + all[3][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 8, 370))
+            line = other_text.render("4ème : " + all[3][0] + " avec " + str(all[3][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 7, 330))
 
         if (len(fichiers) >= 5):
-            line = other_text.render("5eme avec " + str(all[4][1]) + " points : " + all[4][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 8, 440))
+            line = other_text.render("5ème : " + all[4][0] + " avec " + str(all[4][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 7, 380))
 
         if (len(fichiers) >= 6):
-            line = other_text.render("6eme avec " + str(all[5][1]) + " points : " + all[5][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 2, 160))
+            line = other_text.render("6ème : " + all[5][0] + " avec " + str(all[5][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 1.8, 180))
         
         if (len(fichiers) >= 7):
-            line = other_text.render("7eme avec " + str(all[6][1]) + " points : " + all[6][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 2, 230))
+            line = other_text.render("7ème : " + all[6][0] + " avec " + str(all[6][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 1.8, 230))
 
         if (len(fichiers) >= 8):
-            line = other_text.render("8eme avec " + str(all[7][1]) + " points : " + all[7][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 2, 300))
+            line = other_text.render("8ème : " + all[7][0] + " avec " + str(all[7][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 1.8, 280))
 
         if (len(fichiers) >= 9):
-            line = other_text.render("9eme avec " + str(all[8][1]) + " points : " + all[8][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 2, 370))
+            line = other_text.render("9ème : " + all[8][0] + " avec " + str(all[8][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 1.8, 330))
         
         if (len(fichiers) >= 10):
-            line = other_text.render("10eme avec " + str(all[9][1]) + " points : " + all[9][0], True, const.NOIR)
-            ecran.blit(line, (scr_largeur / 2, 440))
+            line = other_text.render("10ème : " + all[9][0] + " avec " + str(all[9][1]) + " points", True, const.NOIR)
+            ecran.blit(line, (scr_largeur / 1.8, 380))
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        # Boutton retour
-        if abs(mouse[0] - scr_largeur / 2 - 70) < 120 and abs(mouse[1] - 550) < 40:
-            pygame.draw.rect(ecran, colors[2][1], (scr_largeur / 2 - 70, 520, 130, 30))
+        #BOUTON RETOUR
+        if abs(mouse[0] - scr_largeur / 2 - 50) < 120 and abs(mouse[1] - 550) < 40:
+            pygame.draw.rect(ecran, const.VIOLINE, (scr_largeur / 2 - 65, 520, 130, 30))
             if click[0] == 1:
                 return
         else:
-            pygame.draw.rect(ecran, colors[2][0], (scr_largeur / 2 - 70, 520, 130, 30))
+            pygame.draw.rect(ecran, const.VIOLET, (scr_largeur / 2 - 65, 520, 130, 30))
 
         back = other_text.render("RETOUR", True, const.NOIR)
-        ecran.blit(back, (scr_largeur / 2 - 60, 525))
+        ecran.blit(back, (scr_largeur / 2 - 35, 518))
         pygame.display.flip()
         clock.tick(10)
 
 # fonction qui crée le l'ecran de départ
-
-
 def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
 
     p1_color_select = 1     # couleur de base des raquettes
