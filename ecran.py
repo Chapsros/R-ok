@@ -87,7 +87,7 @@ selected_color = theme_colors[0][0]
 def theme_ecran(ecran, clock, scr_largeur, scr_hauteur):
 
     # initialisation du font
-    petit_texte = pygame.font.SysFont("comicsans", 35)
+    petit_texte = pygame.font.SysFont(os.path.join(assets, 'CutieShark.ttf'), 35)
 
     while True:
 
@@ -128,11 +128,11 @@ def theme_ecran(ecran, clock, scr_largeur, scr_hauteur):
         # start
         x, y = largeur / 2 - 50, 500
         if (mouse[0] > x) and (mouse[0] < x + 90) and (mouse[1] > 500) and (mouse[1] < 530):
-            pygame.draw.rect(ecran, colors[0][1], (largeur / 2 - 50, 500, 90, 30), 0)
+            pygame.draw.rect(ecran, const.PINK, (largeur / 2 - 50, 500, 90, 30), 0)
             if click[0] == 1:
                 return selected_color
         else:
-            pygame.draw.rect(ecran, colors[0][0], (largeur / 2 - 50, 500, 90, 30), 0)
+            pygame.draw.rect(ecran, const.MAGENTA, (largeur / 2 - 50, 500, 90, 30), 0)
         text_start = petit_texte.render("START", True, const.BLANC)
         ecran.blit(text_start, [largeur / 2 - 44, 500])
 
@@ -211,7 +211,7 @@ def show_info(ecran, scr_largeur, clock):
         line = other_text.render("3. Déplacez votre palais afin de marquer ou de bloquer les tirs adverses.", True, const.BLANC)
         ecran.blit(line, (100, 300))   
 
-        line = other_text.render("4. Le premier joueur à 7 points, gagne la mange.", True, const.BLANC)
+        line = other_text.render("4. Le premier joueur à 7 points, gagne la manche.", True, const.BLANC)
         ecran.blit(line, (100, 350))
         line = other_text.render("Le joueur ayant remporté 3 manches est vainqueur.", True, const.BLANC)
         ecran.blit(line, (130, 385))
@@ -664,9 +664,9 @@ def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
 
         ecran.fill((60, 90, 100))
         texte1 = pygame.font.Font(os.path.join(assets, 'Jelly Crazies.ttf'), 50)
-        texte2 = pygame.font.Font('freesansbold.ttf', 40)
-        texte3 = pygame.font.Font('freesansbold.ttf', 30)
-        disp_text(ecran, "R OKAY", (scr_largeur / 2, 100), texte1, colors[4][0])
+        texte2 = pygame.font.Font(os.path.join(assets, 'CutieShark.ttf'), 40)
+        texte3 = pygame.font.Font(os.path.join(assets, 'CutieShark.ttf'), 30)
+        disp_text(ecran, "R OKAY", (scr_largeur / 2, 70), texte1, const.MAGENTA)
 
         # position de la souris et du click
         mouse = pygame.mouse.get_pos()
@@ -727,18 +727,18 @@ def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
 
         # boutton pour voir le classement
         if abs(mouse[0] - 200) < bouttonRadius and abs(mouse[1] - 470) < bouttonRadius:
-            button_circle(ecran, colors[2][1], (200, 470), "Score", texte2, (255, 255, 255),
+            button_circle(ecran, const.VIOLINE, (200, 470), "Score", texte2, (255, 255, 255),
                           (scr_largeur / 2 - 400, scr_hauteur / 2 + 170), bouttonRadius)
             if click[0] == 1:
                 show_classement(ecran, scr_largeur, clock)
 
         else:
-            button_circle(ecran, colors[2][0], (200, 470), "Score", texte3, (255, 255, 255),
+            button_circle(ecran, const.VIOLET, (200, 470), "Score", texte3, (255, 255, 255),
                           (scr_largeur / 2 - 400, scr_hauteur / 2 + 170), bouttonRadius)
 
         # jouer
         if abs(mouse[0] - 600) < bouttonRadius and abs(mouse[1] - 470) < bouttonRadius:
-            button_circle(ecran, colors[0][1], (600, 470), "Jouer", texte2, (255, 255, 255),
+            button_circle(ecran, const.PINK, (600, 470), "Jouer", texte2, (255, 255, 255),
                           (scr_largeur / 2, scr_hauteur / 2 + 170), bouttonRadius)
             if click[0] == 1:
                 if player_1_name is "":
@@ -748,18 +748,18 @@ def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
                 return 2, player1_color, player2_color, player_1_name, player_2_name
 
         else:
-            button_circle(ecran, colors[0][0], (600, 470), "Jouer", texte3, (255, 255, 255),
+            button_circle(ecran, const.MAGENTA, (600, 470), "Jouer", texte3, (255, 255, 255),
                           (scr_largeur / 2, scr_hauteur / 2 + 170), bouttonRadius)
 
         # boutton pour quitter
         if abs(mouse[0] - 1000) < bouttonRadius and abs(mouse[1] - 470) < bouttonRadius:
-            button_circle(ecran, colors[1][1], (1000, 470), "Quit", texte2, (255, 255, 255),
+            button_circle(ecran, const.OCEAN, (1000, 470), "Quit", texte2, (255, 255, 255),
                           (scr_largeur / 2 + 400, scr_hauteur / 2 + 170), bouttonRadius)
             if click[0] == 1:
                 pygame.quit()
                 sys.exit()
         else:
-            button_circle(ecran, colors[1][0], (1000, 470), "Quit", texte3, (255, 255, 255),
+            button_circle(ecran, const.BLEU, (1000, 470), "Quit", texte3, (255, 255, 255),
                           (scr_largeur / 2 + 400, scr_hauteur / 2 + 170), bouttonRadius)
 
         # boutton quitter
