@@ -231,7 +231,7 @@ def show_info(ecran, scr_largeur, clock):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        # boutton de retour
+        #BOUTON RETOUR
         if abs(mouse[0] - scr_largeur / 2 - 50) < 120 and abs(mouse[1] - 550) < 40:
             pygame.draw.rect(ecran, const.VIOLINE, (scr_largeur / 2 - 50, 520, 130, 30))
             if click[0] == 1:
@@ -244,6 +244,7 @@ def show_info(ecran, scr_largeur, clock):
         pygame.display.flip()
         clock.tick(10)
 
+#ECRAN SHOP
 
 def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
     while True:
@@ -251,17 +252,17 @@ def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
             if event.type == pygame.QUIT:
                 sys.exit()
         ecran.fill((60, 90, 100))
-        main_text = pygame.font.Font('freesansbold.ttf', 35)
-        other_text = pygame.font.Font('freesansbold.ttf', 25)
+        main_text = pygame.font.Font(os.path.join(assets,'Jelly Crazies.ttf'), 35)
+        other_text = pygame.font.Font(os.path.join(assets,'CutieShark.ttf'), 25)
         player_text = pygame.font.Font('freesansbold.ttf', 15)
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
-        game_play = main_text.render('SHOP', True, colors[2][0])
-        ecran.blit(game_play, (550, 20))
-        line = other_text.render("Chaque amélioration coûte 10 points", True, const.BLANC)
-        ecran.blit(line, (380, 70))
+        game_play = main_text.render('SHOP', True, const.VIOLET)
+        ecran.blit(game_play, (500, 10))
+        line = other_text.render("Chaque amélioration coûte 10 points", True, const.VIOLINE)
+        ecran.blit(line, (420, 80))
 
         player_1_point = import_save_alljoueur(player_1_name)[0]
         player_1_taille = import_save_alljoueur(player_1_name)[1]
@@ -276,262 +277,271 @@ def show_shop(ecran, scr_largeur, clock, player_1_name, player_2_name):
         player_2_cage = import_save_alljoueur(player_2_name)[4]
         
 
-        line = other_text.render("Points joueur 1 : " + str(player_1_point), True, const.BLANC)
+        line = other_text.render("Points joueur 1 : " + str(player_1_point), True, const.BLEU)
         ecran.blit(line, (20, 20))
-        line = other_text.render("Points Joueur 2 : " + str(player_2_point), True, const.BLANC)
-        ecran.blit(line, (scr_largeur - 300, 20))
+        line = other_text.render("Points Joueur 2 : " + str(player_2_point), True, const.BLEU)
+        ecran.blit(line, (scr_largeur - 200, 20))
+
+        #TAILLE DU PALAIS
         line = other_text.render("Taille de la raquette", True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 130, 110))
+        ecran.blit(line, (305, 150))
+
         line = player_text.render(player_1_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 150))
-        # boutton plus pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 155) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 155), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 155), bouttonRadius_shop)
+        ecran.blit(line, (370, 193))
+
+        #BOUTON - JOUEUR 1
+        if abs(mouse[0] - (300)) < bouttonRadius_shop and abs(mouse[1] - 200) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (300, 200), "-", other_text, (255, 255, 255),
+                          (300, 200), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_taille <= 90 and player_1_taille > 40:
                     player_1_point += 10
                     player_1_taille -= 5
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 155), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 155), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (300, 200), "-", player_text, (255, 255, 255),
+                          (300, 200), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 155) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 155), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 155), bouttonRadius_shop)
+        #BOUTON + JOUEUR 1
+        if abs(mouse[0] - (500)) < bouttonRadius_shop and abs(mouse[1] - 200) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (500, 200), "+", other_text, (255, 255, 255),
+                          (500, 200), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_point >= 10 and player_1_taille < 90:
                     player_1_point -= 10
                     player_1_taille += 5
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 155), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 155), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (500, 200), "+", player_text, (255, 255, 255),
+                          (500, 200), bouttonRadius_shop)
         
         line = player_text.render(player_2_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 180))
+        ecran.blit(line, (370, 223))
 
-        # boutton plus pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 185) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 185), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 185), bouttonRadius_shop)
+        #BOUTON - JOUEUR 2
+        if abs(mouse[0] - (300)) < bouttonRadius_shop and abs(mouse[1] - 230) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (300, 230), "-", other_text, (255, 255, 255),
+                          (300, 230), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_taille <= 90 and player_2_taille > 40:
                     player_2_point += 10
                     player_2_taille -= 5
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 185), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 185), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (300, 230), "-", player_text, (255, 255, 255),
+                          (300, 230), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 185) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 185), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 185), bouttonRadius_shop)
+        #BOUTON + JOUEUR 2
+        if abs(mouse[0] - (500)) < bouttonRadius_shop and abs(mouse[1] - 230) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (500, 230), "+", other_text, (255, 255, 255),
+                          (500, 230), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_point >= 10 and player_2_taille < 90:
                     player_2_point -= 10
                     player_2_taille += 5
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 185), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 185), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (500, 230), "+", player_text, (255, 255, 255),
+                          (500, 230), bouttonRadius_shop)
 
+        #VITESSE DE LA RAQUETTE
         line = other_text.render("Vitesse de la raquette", True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 140, 210))
-        line = player_text.render(player_1_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 250))
+        ecran.blit(line, (305, 300))
 
-        # boutton plus pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 255) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 255), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 255), bouttonRadius_shop)
+        line = player_text.render(player_1_name, True, const.BLANC)
+        ecran.blit(line, (370, 343))
+
+        #BOUTON - JOUEUR 1
+        if abs(mouse[0] - (300)) < bouttonRadius_shop and abs(mouse[1] - 350) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (300, 350), "-", other_text, (255, 255, 255),
+                          (300, 350), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_vitesse <= 500 and player_1_vitesse > 300:
                     player_1_point += 10
                     player_1_vitesse -= 20
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 255), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 255), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (300, 350), "-", player_text, (255, 255, 255),
+                          (300, 350), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 255) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 255), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 255), bouttonRadius_shop)
+        #BOUTON + JOUEUR 1
+        if abs(mouse[0] - (500)) < bouttonRadius_shop and abs(mouse[1] - 350) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (500, 350), "+", other_text, (255, 255, 255),
+                          (500, 350), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_point >= 10 and player_1_vitesse < 500:
                     player_1_point -= 10
                     player_1_vitesse += 20
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 255), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 255), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (500, 350), "+", player_text, (255, 255, 255),
+                          (500, 350), bouttonRadius_shop)
 
         line = player_text.render(player_2_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 280))
+        ecran.blit(line, (370, 373))
 
-        # boutton plus pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 285) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 285), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 285), bouttonRadius_shop)
+        #BOUTON - JOUEUR 2
+        if abs(mouse[0] - (300)) < bouttonRadius_shop and abs(mouse[1] - 380) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (300, 380), "-", other_text, (255, 255, 255),
+                          (300, 380), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_vitesse <= 500 and player_2_vitesse > 300:
                     player_2_point += 10
                     player_2_vitesse -= 20
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 285), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 285), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (300, 380), "-", player_text, (255, 255, 255),
+                          (300, 380), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 285) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 285), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 285), bouttonRadius_shop)
+        #BOUTON + JOUEUR 2
+        if abs(mouse[0] - (500)) < bouttonRadius_shop and abs(mouse[1] - 380) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (500, 380), "+", other_text, (255, 255, 255),
+                          (500, 380), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_point >= 10 and player_2_vitesse < 500:
                     player_2_point -= 10
                     player_2_vitesse += 20
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 285), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 285), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (500, 380), "+", player_text, (255, 255, 255),
+                          (500, 380), bouttonRadius_shop)
 
+
+        #PUISSANCE DE LA RAQUETE
         line = other_text.render("Puissance de la raquette", True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 160,  310))
-        line = player_text.render(player_1_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 350))
+        ecran.blit(line, (670,  150))
 
-        # boutton plus pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 355) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 355), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 355), bouttonRadius_shop)
+        line = player_text.render(player_1_name, True, const.BLANC)
+        ecran.blit(line, (760, 193))
+
+        #BOUTON - JOUEUR 1
+        if abs(mouse[0] - (690)) < bouttonRadius_shop and abs(mouse[1] - 200) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (690, 200), "-", other_text, (255, 255, 255),
+                          (690, 200), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_mass <= 3500 and player_1_mass > 1500:
                     player_1_point += 10
                     player_1_mass -= 500
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 355), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 355), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (690, 200), "-", player_text, (255, 255, 255),
+                          (690, 200), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 355) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 355), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 355), bouttonRadius_shop)
+        #BOUTON + JOUEUR 1
+        if abs(mouse[0] - (890)) < bouttonRadius_shop and abs(mouse[1] - 200) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (890, 200), "+", other_text, (255, 255, 255),
+                          (890, 200), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_point >= 10 and player_1_mass < 3500:
                     player_1_point -= 10
                     player_1_mass += 500
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 355), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 355), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (890, 200), "+", player_text, (255, 255, 255),
+                          (890, 200), bouttonRadius_shop)
 
         line = player_text.render(player_2_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 380))
+        ecran.blit(line, (760, 223))
 
-        # boutton plus pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 385) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 385), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 385), bouttonRadius_shop)
+        #BOUTON - JOUEUR 2
+        if abs(mouse[0] - (690)) < bouttonRadius_shop and abs(mouse[1] - 230) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (690, 230), "-", other_text, (255, 255, 255),
+                          (690, 230), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_mass <= 3500 and player_2_mass > 1500:
                     player_2_point += 10
                     player_2_mass -= 500
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 385), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 385), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (690, 230), "-", player_text, (255, 255, 255),
+                          (690, 230), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 385) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 385), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 385), bouttonRadius_shop)
+        #BOUTON + JOUEUR 2
+        if abs(mouse[0] - (890)) < bouttonRadius_shop and abs(mouse[1] - 230) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (890, 230), "+", other_text, (255, 255, 255),
+                          (890, 230), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_point >= 10 and player_2_mass < 3500:
                     player_2_point -= 10
                     player_2_mass += 500
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 385), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 385), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (890, 230), "+", player_text, (255, 255, 255),
+                          (890, 230), bouttonRadius_shop)
 
+        #TAILLE DES CAGES
         line = other_text.render("Taille des cages", True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 110, 410))
+        ecran.blit(line, (715, 300))
         line = player_text.render(player_1_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 450))
+        ecran.blit(line, (760, 343))
 
-        # boutton plus pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 455) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 455), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 455), bouttonRadius_shop)
+        #BOUTON - JOUEUR 1
+        if abs(mouse[0] - (690)) < bouttonRadius_shop and abs(mouse[1] - 350) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (690, 350), "-", other_text, (255, 255, 255),
+                          (690, 350), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_cage < 200 and player_1_cage >= 100:
                     player_1_point += 10
                     player_1_cage += 10
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 455), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 455), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (690, 350), "-", player_text, (255, 255, 255),
+                          (690, 350), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 1
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 455) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 455), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 455), bouttonRadius_shop)
+        #BOUTON + JOUEUR 1
+        if abs(mouse[0] - (890)) < bouttonRadius_shop and abs(mouse[1] - 350) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (890, 350), "+", other_text, (255, 255, 255),
+                          (890, 350), bouttonRadius_shop)
             if click[0] == 1:
                 if player_1_point >= 10 and player_1_cage <= 200 and player_1_cage > 100:
                     player_1_point -= 10
                     player_1_cage -= 10
                     update_save_joueur(player_1_name, player_1_point, player_1_taille, player_1_vitesse, player_1_mass, player_1_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 455), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 455), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (890, 350), "+", player_text, (255, 255, 255),
+                          (890, 350), bouttonRadius_shop)
 
         line = player_text.render(player_2_name, True, const.BLANC)
-        ecran.blit(line, (scr_largeur/2 - 30, 480))
+        ecran.blit(line, (760, 373))
 
-        # boutton plus pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 - 90)) < bouttonRadius_shop and abs(mouse[1] - 485) < bouttonRadius_shop:
-            button_circle(ecran, colors[1][1], (scr_largeur / 2 - 90, 485), "-", other_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 485), bouttonRadius_shop)
+        #BOUTON - JOUEUR 2
+        if abs(mouse[0] - (690)) < bouttonRadius_shop and abs(mouse[1] - 380) < bouttonRadius_shop:
+            button_circle(ecran, colors[1][1], (690, 380), "-", other_text, (255, 255, 255),
+                          (690, 380), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_cage < 200 and player_2_cage >= 100:
                     player_2_point += 10
                     player_2_cage += 10
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[1][0], (scr_largeur / 2 - 90, 485), "-", player_text, (255, 255, 255),
-                          (scr_largeur / 2 - 90, 485), bouttonRadius_shop)
+            button_circle(ecran, colors[1][0], (690, 380), "-", player_text, (255, 255, 255),
+                          (690, 380), bouttonRadius_shop)
 
-        # boutton moins pour le joueur 2
-        if abs(mouse[0] - (scr_largeur / 2 + 90)) < bouttonRadius_shop and abs(mouse[1] - 485) < bouttonRadius_shop:
-            button_circle(ecran, colors[0][1], (scr_largeur / 2 + 90, 485), "+", other_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 485), bouttonRadius_shop)
+        #BOUTON + JOUEUR 2
+        if abs(mouse[0] - (890)) < bouttonRadius_shop and abs(mouse[1] - 380) < bouttonRadius_shop:
+            button_circle(ecran, colors[0][1], (890, 380), "+", other_text, (255, 255, 255),
+                          (890, 380), bouttonRadius_shop)
             if click[0] == 1:
                 if player_2_point >= 10 and player_2_cage <= 200 and player_2_cage > 100:
                     player_2_point -= 10
                     player_2_cage -= 10
                     update_save_joueur(player_2_name, player_2_point, player_2_taille, player_2_vitesse, player_2_mass, player_2_cage)
         else:
-            button_circle(ecran, colors[0][0], (scr_largeur / 2 + 90, 485), "+", player_text, (255, 255, 255),
-                          (scr_largeur / 2 + 90, 485), bouttonRadius_shop)
+            button_circle(ecran, colors[0][0], (890, 380), "+", player_text, (255, 255, 255),
+                          (890, 380), bouttonRadius_shop)
 
-        # Boutton retour
-        if abs(mouse[0] - scr_largeur / 2 - 70) < 120 and abs(mouse[1] - 550) < 40:
-            pygame.draw.rect(ecran, colors[2][1], (scr_largeur / 2 - 70, 520, 130, 30))
+        #BOUTON RETOUR
+        if abs(mouse[0] - scr_largeur / 2 - 50) < 120 and abs(mouse[1] - 550) < 40:
+            pygame.draw.rect(ecran, const.VIOLINE, (scr_largeur / 2 - 65, 520, 130, 30))
             if click[0] == 1:
                 return
         else:
-            pygame.draw.rect(ecran, colors[2][0], (scr_largeur / 2 - 70, 520, 130, 30))
+            pygame.draw.rect(ecran, const.VIOLET, (scr_largeur / 2 - 65, 520, 130, 30))
 
         back = other_text.render("RETOUR", True, const.NOIR)
-        ecran.blit(back, (scr_largeur / 2 - 60, 525))
+        ecran.blit(back, (scr_largeur / 2 - 35, 518))
         pygame.display.flip()
         clock.tick(10)
-
 
 # fonction ecran classement
 def show_classement(ecran, scr_largeur, clock):
