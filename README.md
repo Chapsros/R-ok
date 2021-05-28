@@ -8,11 +8,8 @@
 
 ## Installation et configuration
 
-Téléchargez le projet.
+1. Téléchargez le projet.
+1. Ouvrez le dossier grâce à un IDE.
+1. Et lancez le projet en exécutant le fichier `main.py`.
 
-**METHODE 1 :**
-Ouvrez le dossier grâce à un IDE.
-Et lancez le projet en exécutant le fichier `main.py`.
-
-**METHODE 2 :**
 
