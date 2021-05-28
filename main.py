@@ -417,7 +417,6 @@ if __name__ == "__main__":
             player_1_CAGE_Y2 = const.HAUTEUR / 2 + player_1_cage / 2
             player_2_CAGE_Y1 = const.HAUTEUR / 2 - player_2_cage / 2
             player_2_CAGE_Y2 = const.HAUTEUR / 2 + player_2_cage / 2
-            # Create game objects.
             raquette1 = Raquette(const.RAQUETTE1X, const.RAQUETTE1Y, player_1_taille, player_1_vitesse, player_1_mass)
             raquette2 = Raquette(const.RAQUETTE2X, const.RAQUETTE2Y, player_2_taille, player_2_vitesse, player_2_mass)
             puck = Puck(largeur / 2, hauteur / 2, 30, 450, 500)
