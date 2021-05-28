@@ -808,7 +808,7 @@ def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
 
                     mouse = pygame.mouse.get_pos()
                     click = pygame.mouse.get_pressed()
-                    disp_text(ecran, "R OKAY", (scr_largeur / 2, 100), texte1, colors[4][0])
+                    disp_text(ecran, "R OKAY", (scr_largeur / 2, 70), texte1, const.MAGENTA)
 
                     if blink:
                         blink_ch = "|"
@@ -848,7 +848,7 @@ def air_hockey_start(ecran, clock, scr_largeur, scr_hauteur):
                     mouse = pygame.mouse.get_pos()
                     click = pygame.mouse.get_pressed()
 
-                    disp_text(ecran, "R OKAY", (scr_largeur / 2, 100), texte1, colors[4][0])
+                    disp_text(ecran, "R OKAY", (scr_largeur / 2, 70), texte1, const.MAGENTA)
 
                     if blink:
                         blink_ch = "|"
