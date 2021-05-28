@@ -1,6 +1,6 @@
 # R-ok
 
-## requirement
+## Requirement
 
 * `Python 3.9.4`
 * `Pip`
@@ -8,4 +8,8 @@
 
 ## Installation et configuration
 
-télécharger le projet et lancé le projet via le fichier `main.py`
+Téléchargez le projet.
+
+METHODE 1 : 
+Ouvrez le dossier grâce à un IDE.
+Et lancez le projet en exécutant le fichier `main.py`.
