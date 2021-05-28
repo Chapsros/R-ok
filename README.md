@@ -10,6 +10,9 @@
 
 Téléchargez le projet.
 
-METHODE 1 : 
+**METHODE 1 :**
 Ouvrez le dossier grâce à un IDE.
 Et lancez le projet en exécutant le fichier `main.py`.
+
+**METHODE 2 :**
+
